@@ -16,38 +16,25 @@ public class ItemController {
 
     @GetMapping("/shoes")
     public String getShoes() {
-        Shoes shoes = new Shoes();
-        shoes.setName("shoes1");
-        itemRepository.save(shoes);
-        List<Item> shoes1 = itemRepository.findByType("shoes");
-        for (Item item : shoes1) {
-            System.out.println("item.getName() = " + item.getName());
-        }
+        List<Shoes> allShoes = itemRepository.findAllShoes();
         return "item";
     }
 
     @GetMapping("/top")
     public String getTop() {
-        Top top = new Top();
-        top.setName("top1");
-        itemRepository.save(top);
+        List<Top> allTop = itemRepository.findAllTop();
         return "item";
     }
 
     @GetMapping("/bottom")
     public String getBottom() {
-        Bottom bottom = new Bottom();
-        bottom.setName("bottom1");
-        itemRepository.save(bottom);
+        List<Bottom> allBottom = itemRepository.findAllBottom();
         return "item";
     }
 
     @GetMapping("/stock")
     public String getStock() {
-        Stock stock = new Stock();
-        stock.setName("stock1");
-        stock.setStockKind(StockKind.CARD);
-        itemRepository.save(stock);
+        List<Stock> allStock = itemRepository.findAllStock();
         return "item";
     }
 }

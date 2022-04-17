@@ -2,7 +2,7 @@ package yerim.board.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import yerim.board.domain.item.Item;
+import yerim.board.domain.item.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -19,9 +19,19 @@ public class ItemRepository {
         em.persist(item);
     }
 
-    public List<Item> findByType(String item_type) {
-       return em.createQuery("select i from Item i where i.category = :item_type", Item.class)
-                .setParameter("item_type", item_type)
-                .getResultList();
+    public List<Shoes> findAllShoes() {
+        return em.createQuery("select s from Shoes as s", Shoes.class).getResultList();
+    }
+
+    public List<Top> findAllTop() {
+        return em.createQuery("select t from Top as t", Top.class).getResultList();
+    }
+
+    public List<Bottom> findAllBottom() {
+        return em.createQuery("select b from Bottom as b", Bottom.class).getResultList();
+    }
+
+    public List<Stock> findAllStock() {
+        return em.createQuery("select s from Stock as s", Stock.class).getResultList();
     }
 }
