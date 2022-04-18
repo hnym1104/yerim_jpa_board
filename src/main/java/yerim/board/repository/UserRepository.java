@@ -16,6 +16,7 @@ public class UserRepository {
 
     @Transactional
     public void save(User user) {
+        System.out.println("user.getLoginID() = " + user.getLoginID());
         em.persist(user);
     }
 
@@ -26,5 +27,12 @@ public class UserRepository {
     public List<User> findAll() {
         return em.createQuery("select m from User as m", User.class)
                 .getResultList();
+    }
+
+    public User findOneById(String loginID, String loginPW) {   // ID, PW 동일한 회원 검색
+        return em.createQuery("select u from User as u where u.loginID = :loginID and u.loginPW = :loginPW", User.class)
+                .setParameter("loginID", loginID)
+                .setParameter("loginPW", loginPW)
+                .getSingleResult();
     }
 }

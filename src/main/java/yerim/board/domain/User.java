@@ -16,10 +16,14 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    private String ID;
-    private String PW;
+    public User() {
+    }
+
+    private String loginID;
+    private String loginPW;
     private String name;
     private String email;
+
     private Long totalSellPrice;
     private Long totalBuyPrice;
 
