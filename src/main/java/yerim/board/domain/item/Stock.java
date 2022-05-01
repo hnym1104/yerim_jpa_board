@@ -2,11 +2,14 @@ package yerim.board.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import yerim.board.domain.SellStatus;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -15,4 +18,8 @@ public class Stock extends Item {
 
     @Enumerated(EnumType.STRING)
     private StockKind stockKind;
+
+    public Stock() {
+
+    }
 }

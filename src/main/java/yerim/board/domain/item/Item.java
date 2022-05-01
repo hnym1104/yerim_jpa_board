@@ -2,10 +2,11 @@ package yerim.board.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.IndexColumn;
-import yerim.board.domain.Category;
+import yerim.board.domain.SellStatus;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -17,15 +18,24 @@ public abstract class Item {
     @Column(name = "item_id")
     private Long id;
 
+    private String name;
+    private int stockQuantity;
+    private Long buyPrice;   // 상품 개당 가격
+    private String whereToBuy;   // 구매처
+    private LocalDateTime buyTime;
+
+    @Enumerated(EnumType.STRING)
+    private SellStatus sellStatus;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private String name;
-    private Long price;
-    private Long stockQuantity;
+    public Item() {
+    }
 
-    //@Column(name = "item_type")
-    //private String item_type;
+    /*public Long totalPrice() {
+        return stockQuantity * buyPrice;   // 총 구매 가격
+    }*/
 
 }

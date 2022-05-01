@@ -2,6 +2,7 @@ package yerim.board.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import yerim.board.domain.item.Category;
 import yerim.board.domain.item.*;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,15 @@ public class ItemRepository {
     @Transactional
     public void save(Item item) {
         em.persist(item);
+    }
+
+    @Transactional
+    public void saveCategory(Category category) {
+        em.persist(category);
+    }
+
+    public List<Item> findAll() {
+        return em.createQuery("select i from Item as i", Item.class).getResultList();
     }
 
     public List<Shoes> findAllShoes() {

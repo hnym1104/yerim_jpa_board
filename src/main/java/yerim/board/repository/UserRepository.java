@@ -1,6 +1,7 @@
 package yerim.board.repository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import yerim.board.domain.User;
 
@@ -10,14 +11,15 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class UserRepository {
 
     private final EntityManager em;
 
     @Transactional
     public void save(User user) {
-        System.out.println("user.getLoginID() = " + user.getLoginID());
         em.persist(user);
+        log.info("userId={}", user.getId());
     }
 
     public User findOne(Long userId) {
