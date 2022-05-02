@@ -6,7 +6,6 @@ import yerim.board.domain.SellStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -22,7 +21,8 @@ public abstract class Item {
     private int stockQuantity;
     private Long buyPrice;   // 상품 개당 가격
     private String whereToBuy;   // 구매처
-    private LocalDateTime buyTime;
+
+    private LocalDate buyTime;   // 구매 시간
 
     @Enumerated(EnumType.STRING)
     private SellStatus sellStatus;
@@ -32,6 +32,16 @@ public abstract class Item {
     private Category category;
 
     public Item() {
+    }
+
+    public Item(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, SellStatus sellStatus, Category category) {
+        this.name = name;
+        this.stockQuantity = stockQuantity;
+        this.buyPrice = buyPrice;
+        this.whereToBuy = whereToBuy;
+        this.buyTime = buyTime;
+        this.sellStatus = sellStatus;
+        this.category = category;
     }
 
     /*public Long totalPrice() {

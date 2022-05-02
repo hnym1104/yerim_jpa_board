@@ -18,4 +18,9 @@ public class Bottom extends Item {
     public Bottom() {
 
     }
+
+    public Bottom(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, SellStatus sellStatus, Category category, String size) {
+        super(name, stockQuantity, buyPrice, whereToBuy, buyTime, sellStatus, category);
+        this.size = size;
+    }
 }

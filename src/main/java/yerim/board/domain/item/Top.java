@@ -18,4 +18,9 @@ public class Top extends Item {
     public Top() {
 
     }
+
+    public Top(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, SellStatus sellStatus, Category category, String size) {
+        super(name, stockQuantity, buyPrice, whereToBuy, buyTime, sellStatus, category);
+        this.size = size;
+    }
 }

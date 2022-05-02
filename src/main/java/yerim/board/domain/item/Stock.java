@@ -22,4 +22,9 @@ public class Stock extends Item {
     public Stock() {
 
     }
+
+    public Stock(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, SellStatus sellStatus, Category category, StockKind stockKind) {
+        super(name, stockQuantity, buyPrice, whereToBuy, buyTime, sellStatus, category);
+        this.stockKind = stockKind;
+    }
 }

@@ -2,6 +2,7 @@ package yerim.board.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import yerim.board.domain.SellStatus;
 import yerim.board.domain.item.Category;
 import yerim.board.domain.item.*;
 
@@ -18,11 +19,6 @@ public class ItemRepository {
     @Transactional
     public void save(Item item) {
         em.persist(item);
-    }
-
-    @Transactional
-    public void saveCategory(Category category) {
-        em.persist(category);
     }
 
     public List<Item> findAll() {
@@ -43,5 +39,25 @@ public class ItemRepository {
 
     public List<Stock> findAllStock() {
         return em.createQuery("select s from Stock as s", Stock.class).getResultList();
+    }
+
+    public List<Item> findAllKeepSelling() {
+        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.KEEP_SELLING order by i.buyTime desc", Item.class)
+                .getResultList();
+    }
+
+    public List<Item> findAllNormalSelling() {
+        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.NORMAL_SELLING order by i.buyTime desc", Item.class)
+                .getResultList();
+    }
+
+    public List<Item> findAllHaving() {
+        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.HAVING order by i.buyTime desc", Item.class)
+                .getResultList();
+    }
+
+    public List<Item> findAllSold() {
+        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.SOLD order by i.buyTime desc", Item.class)
+                .getResultList();
     }
 }

@@ -18,4 +18,9 @@ public class Shoes extends Item{
     public Shoes() {
 
     }
+
+    public Shoes(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, SellStatus sellStatus, Category category, String size) {
+        super(name, stockQuantity, buyPrice, whereToBuy, buyTime, sellStatus, category);
+        this.size = size;
+    }
 }

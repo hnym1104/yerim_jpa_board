@@ -13,6 +13,7 @@ import yerim.board.domain.item.*;
 import yerim.board.repository.CategoryRepository;
 import yerim.board.repository.ItemRepository;
 import yerim.board.repository.UserRepository;
+import yerim.board.service.ItemService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -23,10 +24,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class HomeController {
-
-    private final UserRepository userRepository;
+    
     private final ItemRepository itemRepository;
     private final CategoryRepository categoryRepository;
+    
+    private final ItemService itemService;
 
     @GetMapping("/")
     public String getHome() {
@@ -42,14 +44,7 @@ public class HomeController {
 
     @GetMapping("/board")
     public String getBoard(Model model) {
-        Category bottomCate = categoryRepository.findByName("bottom");
-        Bottom bottom = new Bottom();
-        bottom.setName("bottom1");
-        bottom.setSellStatus(SellStatus.HAVING);
-        bottom.setCategory(bottomCate);
-        bottom.setBuyTime(LocalDateTime.now());
-        itemRepository.save(bottom);
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemService.getAllItem();
         model.addAttribute("items", items);
         return "board";
     }
@@ -65,9 +60,38 @@ public class HomeController {
         Category topCategory = new Category("top");
         Category shoesCategory = new Category("shoes");
         Category stockCategory = new Category("stock");
-        itemRepository.saveCategory(bottomCategory);
-        itemRepository.saveCategory(topCategory);
-        itemRepository.saveCategory(shoesCategory);
-        itemRepository.saveCategory(stockCategory);
+        categoryRepository.save(bottomCategory);
+        categoryRepository.save(topCategory);
+        categoryRepository.save(shoesCategory);
+        categoryRepository.save(stockCategory);
+
+        Bottom bottom1 = new Bottom("bottom1", 1, 20000L, "KREAM", LocalDate.of(2021, 5, 2)
+                ,SellStatus.KEEP_SELLING, bottomCategory, "M");
+        Top top1 = new Top("top1", 1, 40000L, "KREAM", LocalDate.of(2021, 5, 4)
+                ,SellStatus.KEEP_SELLING, topCategory, "L");
+
+        Shoes shoes1 = new Shoes("shoes1", 1, 100000L, "KREAM", LocalDate.of(2021, 7, 2)
+                ,SellStatus.NORMAL_SELLING, shoesCategory, "260");
+        Stock stock1 = new Stock("stock1", 4, 5000L, "COUPANG", LocalDate.of(2021, 6, 5)
+                , SellStatus.NORMAL_SELLING, stockCategory, StockKind.CARD);
+
+        Bottom bottom2 = new Bottom("bottom2", 1, 20000L, "KREAM", LocalDate.of(2021, 8, 2)
+                ,SellStatus.HAVING, bottomCategory, "M");
+        Top top2 = new Top("top2", 1, 40000L, "KREAM", LocalDate.of(2021, 5, 4)
+                ,SellStatus.HAVING, topCategory, "L");
+
+        Shoes shoes2 = new Shoes("shoes2", 1, 100000L, "KREAM", LocalDate.of(2021, 7, 2)
+                ,SellStatus.SOLD, shoesCategory, "250");
+        Stock stock2 = new Stock("stock2", 4, 5000L, "COUPANG", LocalDate.of(2021, 6, 5)
+                , SellStatus.SOLD, stockCategory, StockKind.STICKER);
+
+        itemRepository.save(bottom1);
+        itemRepository.save(bottom2);
+        itemRepository.save(top1);
+        itemRepository.save(top2);
+        itemRepository.save(shoes1);
+        itemRepository.save(shoes2);
+        itemRepository.save(stock1);
+        itemRepository.save(stock2);
     }
 }
