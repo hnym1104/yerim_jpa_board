@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Add</title>
+</head>
+<body>
+<div th:replace="fragments/menu :: menu"/>
+<form th:object="${item}" method="post" th:action="@{/item/add}">
+    <label for="name">이름</label>
+    <input id=name th:field="*{name}" />
+
+    <label for="stockQuantity">수량</label>
+    <input id=stockQuantity th:field="*{stockQuantity}" />
+
+    <label for="buyTime">구매 일시</label>
+    <input id="buyTime" th:field="*{buyTime}" />
+
+    <label for="whereToBuy">구매처</label>
+    <input id="whereToBuy" th:field="*{whereToBuy}" />
+
+    <label for="buyPrice">구매 가격</label>
+    <input id="buyPrice" th:field="*{buyPrice}" />
+
+    <select id=category th:field="*{category}">
+        <option value="">==카테고리==</option>
+        <option value="bottom">하의</option>
+        <option value="top">상의</option>
+        <option value="shoes">신발</option>
+        <option value="stock">잡화</option>
+    </select>
+</form>
+</body>
+</html>

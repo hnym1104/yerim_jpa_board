@@ -7,17 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import yerim.board.domain.SellStatus;
+import yerim.board.domain.Status;
 import yerim.board.domain.item.Category;
 import yerim.board.domain.item.*;
 import yerim.board.repository.CategoryRepository;
 import yerim.board.repository.ItemRepository;
-import yerim.board.repository.UserRepository;
 import yerim.board.service.ItemService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -66,24 +64,24 @@ public class HomeController {
         categoryRepository.save(stockCategory);
 
         Bottom bottom1 = new Bottom("bottom1", 1, 20000L, "KREAM", LocalDate.of(2021, 5, 2)
-                ,SellStatus.KEEP_SELLING, bottomCategory, "M");
+                , Status.KEEP_SELLING, bottomCategory, "M");
         Top top1 = new Top("top1", 1, 40000L, "KREAM", LocalDate.of(2021, 5, 4)
-                ,SellStatus.KEEP_SELLING, topCategory, "L");
+                , Status.KEEP_SELLING, topCategory, "L");
 
         Shoes shoes1 = new Shoes("shoes1", 1, 100000L, "KREAM", LocalDate.of(2021, 7, 2)
-                ,SellStatus.NORMAL_SELLING, shoesCategory, "260");
+                , Status.NORMAL_SELLING, shoesCategory, "260");
         Stock stock1 = new Stock("stock1", 4, 5000L, "COUPANG", LocalDate.of(2021, 6, 5)
-                , SellStatus.NORMAL_SELLING, stockCategory, StockKind.CARD);
+                , Status.NORMAL_SELLING, stockCategory, StockKind.CARD);
 
         Bottom bottom2 = new Bottom("bottom2", 1, 20000L, "KREAM", LocalDate.of(2021, 8, 2)
-                ,SellStatus.HAVING, bottomCategory, "M");
+                , Status.HAVING, bottomCategory, "M");
         Top top2 = new Top("top2", 1, 40000L, "KREAM", LocalDate.of(2021, 5, 4)
-                ,SellStatus.HAVING, topCategory, "L");
+                , Status.HAVING, topCategory, "L");
 
         Shoes shoes2 = new Shoes("shoes2", 1, 100000L, "KREAM", LocalDate.of(2021, 7, 2)
-                ,SellStatus.SOLD, shoesCategory, "250");
+                , Status.SOLD, shoesCategory, "250");
         Stock stock2 = new Stock("stock2", 4, 5000L, "COUPANG", LocalDate.of(2021, 6, 5)
-                , SellStatus.SOLD, stockCategory, StockKind.STICKER);
+                , Status.SOLD, stockCategory, StockKind.STICKER);
 
         itemRepository.save(bottom1);
         itemRepository.save(bottom2);
@@ -93,5 +91,7 @@ public class HomeController {
         itemRepository.save(shoes2);
         itemRepository.save(stock1);
         itemRepository.save(stock2);
+
+
     }
 }

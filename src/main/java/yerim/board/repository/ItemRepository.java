@@ -2,8 +2,8 @@ package yerim.board.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import yerim.board.domain.SellStatus;
-import yerim.board.domain.item.Category;
+import yerim.board.domain.ItemSelling;
+import yerim.board.domain.ItemSold;
 import yerim.board.domain.item.*;
 
 import javax.persistence.EntityManager;
@@ -19,6 +19,10 @@ public class ItemRepository {
     @Transactional
     public void save(Item item) {
         em.persist(item);
+    }
+
+    public Item findById(Long id) {
+        return em.find(Item.class, id);
     }
 
     public List<Item> findAll() {
@@ -42,22 +46,34 @@ public class ItemRepository {
     }
 
     public List<Item> findAllKeepSelling() {
-        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.KEEP_SELLING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.KEEP_SELLING order by i.buyTime desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllNormalSelling() {
-        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.NORMAL_SELLING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.NORMAL_SELLING order by i.buyTime desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllHaving() {
-        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.HAVING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.HAVING order by i.buyTime desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllSold() {
-        return em.createQuery("select i from Item as i where i.sellStatus = yerim.board.domain.SellStatus.SOLD order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.SOLD order by i.buyTime desc", Item.class)
                 .getResultList();
+    }
+
+    public ItemSold findItemSoldByItemId(Long itemId) {
+        return em.createQuery("select i from ItemSold as i where i.item.id = :itemId", ItemSold.class)
+                .setParameter("itemId", itemId)
+                .getSingleResult();
+    }
+
+    public ItemSelling findItemSellingByItemId(Long itemId) {
+        return em.createQuery("select i from ItemSelling as i where i.item.id = :itemId", ItemSelling.class)
+                .setParameter("itemId", itemId)
+                .getSingleResult();
     }
 }

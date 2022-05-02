@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Information</title>
+</head>
+<body>
+<div th:replace="fragments/menu :: menu"/>
+<p th:text="${item.name}">이름</p>
+<p th:text="${item.stockQuantity}">수량</p>
+<p th:text="${item.category}">카테고리</p>
+<p th:text="${item.buyPrice}">구매 가격</p>
+<p th:text="${item.whereToBuy}">구매처</p>
+<span th:if="${item.status == T(yerim.board.domain.Status).HAVING}">
+    <button type="button">판매중으로 상태 변경</button>
+    <button type="button">판매완료로 상태 변경</button>
+</span>
+<span th:if="${item.status == T(yerim.board.domain.Status).SOLD}">
+    <p th:text="${itemSold.soldPrice}">판매 가격</p>
+    <p th:text="${itemSold.whereToSold}">판매처</p>
+    <p th:text="${itemSold.soldTime}">판매 일시</p>
+    <p th:text="${itemSold.soldMethod.description}">판매 방법</p>
+</span>
+<span th:if="${item.status == T(yerim.board.domain.Status).KEEP_SELLING || item.status == T(yerim.board.domain.Status).NORMAL_SELLING}">
+    <p th:text="${itemSelling.sellingPrice}">판매중 가격</p>
+    <p th:text="${itemSelling.whereToSelling}">판매처</p>
+    <p th:text="${itemSelling.status.description}">판매중 방식</p>
+</span>
+</body>
+</html>

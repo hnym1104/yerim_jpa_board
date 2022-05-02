@@ -19,12 +19,12 @@ public class ItemSold {   // 판매 완료된 ITEM
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private Long soldPrice;
-    private String whereToSold;
+    private Long soldPrice;   // 판매가
+    private String whereToSold;   // 판매처
     private LocalDateTime soldTime;   // 판매일시
 
     @Enumerated(EnumType.STRING)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Table V04</title>
+    <title>Item List</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
 
@@ -28,6 +28,7 @@
                             <th class="cell100 column1">NAME</th>
                             <th class="cell100 column2">SELL STATUS</th>
                             <th class="cell100 column3">CATEGORY</th>
+                            <th class="cell100 column3">DATE</th>
                         </tr>
                         </thead>
                     </table>
@@ -37,111 +38,15 @@
                     <table>
                         <tbody>
                         <tr class="row100 body" th:each="item : ${items}">
-                            <td class="cell100 column1" th:text="${item.name}">Zumba Dance</td>
-                            <td class="cell100 column2" th:text="${item.sellStatus.description}">Dance</td>
-                            <td class="cell100 column3" th:text="${item.category.name}">Dance</td>
+                            <td class="cell100 column1" th:text="${item.name}"
+                                th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|"></td>
+                            <td class="cell100 column2" th:text="${item.status.description}">sell status</td>
+                            <td class="cell100 column3" th:text="${item.category.name}">category</td>
+                            <td class="cell100 column4" th:text="${item.buyTime}">buy time</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
-
-                <!--<table>
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Cardio Blast</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">5:00 PM - 7:00 PM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">10</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Pilates Reformer</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">8:00 AM - 9:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">10</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Supple Spine and Shoulders</td>
-                        <td class="cell100 column2">Yoga</td>
-                        <td class="cell100 column3">6:30 AM - 8:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">15</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Yoga for Divas</td>
-                        <td class="cell100 column2">Yoga</td>
-                        <td class="cell100 column3">9:00 AM - 11:00 AM</td>
-                        <td class="cell100 column4">Donna Wilson</td>
-                        <td class="cell100 column5">20</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Virtual Cycle</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">8:00 AM - 9:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">20</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Like a butterfly</td>
-                        <td class="cell100 column2">Boxing</td>
-                        <td class="cell100 column3">9:00 AM - 11:00 AM</td>
-                        <td class="cell100 column4">Aaron Chapman</td>
-                        <td class="cell100 column5">10</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Mind & Body</td>
-                        <td class="cell100 column2">Yoga</td>
-                        <td class="cell100 column3">8:00 AM - 9:00 AM</td>
-                        <td class="cell100 column4">Adam Stewart</td>
-                        <td class="cell100 column5">15</td>
-                    </tr>
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Cardio Blast</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">5:00 PM - 7:00 PM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">10</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Pilates Reformer</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">8:00 AM - 9:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">10</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Supple Spine and Shoulders</td>
-                        <td class="cell100 column2">Yoga</td>
-                        <td class="cell100 column3">6:30 AM - 8:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">15</td>
-                    </tr>
-
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Yoga for Divas</td>
-                        <td class="cell100 column2">Yoga</td>
-                        <td class="cell100 column3">9:00 AM - 11:00 AM</td>
-                        <td class="cell100 column4">Donna Wilson</td>
-                        <td class="cell100 column5">20</td>
-                    </tr>
-                    <tr class="row100 body">
-                        <td class="cell100 column1">Virtual Cycle</td>
-                        <td class="cell100 column2">Gym</td>
-                        <td class="cell100 column3">8:00 AM - 9:00 AM</td>
-                        <td class="cell100 column4">Randy Porter</td>
-                        <td class="cell100 column5">20</td>
-                    </tr>
-                    </tbody>
-                </table>-->
             </div>
         </div>
     </div>
