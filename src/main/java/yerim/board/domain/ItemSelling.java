@@ -22,6 +22,17 @@ public class ItemSelling {
     private Item item;
 
     private Long sellingPrice;   // 판매 중인 가격
-    private Long whereToSelling;   // 판매중인 곳
+    private String whereToSelling;   // 판매중인 곳
     private Status status;   // 창고인지 일반인지
+
+    public ItemSelling() {
+    }
+
+    public ItemSelling(User user, Item item, Long sellingPrice, String whereToSelling, Status status) {
+        this.user = user;
+        this.item = item;
+        this.sellingPrice = sellingPrice;
+        this.whereToSelling = whereToSelling;
+        this.status = status;
+    }
 }

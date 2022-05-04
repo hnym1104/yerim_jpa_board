@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import yerim.board.domain.Status;
 import yerim.board.domain.item.*;
 import yerim.board.repository.ItemRepository;
@@ -23,34 +21,11 @@ public class ItemController {
     private final ItemRepository itemRepository;
     private final ItemService itemService;
 
-    @GetMapping("/shoes")
-    public String getShoes() {
-        List<Shoes> allShoes = itemRepository.findAllShoes();
-        return "item/itemInfo";
-    }
-
-    @GetMapping("/top")
-    public String getTop() {
-        List<Top> allTop = itemRepository.findAllTop();
-        return "item/itemInfo";
-    }
-
-    @GetMapping("/bottom")
-    public String getBottom() {
-        List<Bottom> allBottom = itemRepository.findAllBottom();
-        return "item/itemInfo";
-    }
-
-    @GetMapping("/stock")
-    public String getStock() {
-        List<Stock> allStock = itemRepository.findAllStock();
-        return "item/itemInfo";
-    }
-
     @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
+        log.info("ItemController.item");
         Item item = itemRepository.findById(itemId);
-        log.info("item={}", item.getName());
+        log.info("item={}", item.getId());
         model.addAttribute("item", item);
         if (item.getStatus() == Status.SOLD) {
             model.addAttribute("itemSold", itemRepository.findItemSoldByItemId(item.getId()));
@@ -65,4 +40,11 @@ public class ItemController {
         model.addAttribute("item", new Item());
         return "item/add";
     }
+
+    @PostMapping("/add")
+    public String add(@ModelAttribute Item item) {
+        return "redirect:board";
+    }
+
+
 }

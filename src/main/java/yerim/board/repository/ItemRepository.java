@@ -21,6 +21,16 @@ public class ItemRepository {
         em.persist(item);
     }
 
+    @Transactional
+    public void saveSellingItem(ItemSelling itemSelling) {
+        em.persist(itemSelling);
+    }
+
+    @Transactional
+    public void saveSoldItem(ItemSold itemSold) {
+        em.persist(itemSold);
+    }
+
     public Item findById(Long id) {
         return em.find(Item.class, id);
     }

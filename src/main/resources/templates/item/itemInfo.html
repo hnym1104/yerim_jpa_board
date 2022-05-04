@@ -8,7 +8,7 @@
 <div th:replace="fragments/menu :: menu"/>
 <p th:text="${item.name}">이름</p>
 <p th:text="${item.stockQuantity}">수량</p>
-<p th:text="${item.category}">카테고리</p>
+<p th:text="${item.category.name}">카테고리</p>
 <p th:text="${item.buyPrice}">구매 가격</p>
 <p th:text="${item.whereToBuy}">구매처</p>
 <span th:if="${item.status == T(yerim.board.domain.Status).HAVING}">

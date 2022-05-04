@@ -4,69 +4,29 @@
     <title>Item List</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-
-    <!--table-->
-    <link rel="icon" type="image/png" href="/table_theme/images/icons/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/table_theme/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/vendor/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/table_theme/css/main.css">
 </head>
-<body>
 <div th:replace="fragments/menu :: menu"/>
-<div class="limiter">
-    <div class="container-table100">
-        <div class="wrap-table100">
-            <div class="table100 ver4 m-b-110">
-                <div class="table100-head">
-                    <table>
-                        <thead>
-                        <tr class="row100 head">
-                            <th class="cell100 column1">NAME</th>
-                            <th class="cell100 column2">SELL STATUS</th>
-                            <th class="cell100 column3">CATEGORY</th>
-                            <th class="cell100 column3">DATE</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-
-                <div class="table100-body js-pscroll">
-                    <table>
-                        <tbody>
-                        <tr class="row100 body" th:each="item : ${items}">
-                            <td class="cell100 column1" th:text="${item.name}"
-                                th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|"></td>
-                            <td class="cell100 column2" th:text="${item.status.description}">sell status</td>
-                            <td class="cell100 column3" th:text="${item.category.name}">category</td>
-                            <td class="cell100 column4" th:text="${item.buyTime}">buy time</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<body>
+    <div class="table" style="width: 80%; margin: auto">
+        <table class="table table-hover">
+            <thead>
+            <tr class="table table-primary">
+                <th class="table-primary">NAME</th>
+                <th class="table-primary">SELL STATUS</th>
+                <th class="table-primary">CATEGORY</th>
+                <th class="table-primary">DATE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table table-hover" th:each="item : ${items}">
+                <td th:text="${item.name}"
+                    th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|"></td>
+                <td th:text="${item.status.description}">sell status</td>
+                <td th:text="${item.category.name}">category</td>
+                <td th:text="${item.buyTime}">buy time</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
-</div>
-
-<script src="/table_theme/vendor/jquery/jquery-3.2.1.min.js"></script>
-<script src="/table_theme/vendor/bootstrap/js/popper.js"></script>
-<script src="/table_theme/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="/table_theme/vendor/select2/select2.min.js"></script>
-<script src="/table_theme/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script>
-    $('.js-pscroll').each(function () {
-        var ps = new PerfectScrollbar(this);
-
-        $(window).on('resize', function () {
-            ps.update();
-        })
-    });
-</script>
-<script src="/table_theme/js/main.js"></script>
 </body>
 </html>

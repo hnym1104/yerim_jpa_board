@@ -27,4 +27,10 @@ public class User {
     private Long totalSellPrice;
     private Long totalBuyPrice;
 
+    public User(String loginID, String loginPW, String name, String email) {
+        this.loginID = loginID;
+        this.loginPW = loginPW;
+        this.name = name;
+        this.email = email;
+    }
 }

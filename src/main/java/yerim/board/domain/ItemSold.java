@@ -5,6 +5,7 @@ import lombok.Setter;
 import yerim.board.domain.item.Item;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,8 +26,20 @@ public class ItemSold {   // 판매 완료된 ITEM
 
     private Long soldPrice;   // 판매가
     private String whereToSold;   // 판매처
-    private LocalDateTime soldTime;   // 판매일시
+    private LocalDate soldTime;   // 판매일시
 
     @Enumerated(EnumType.STRING)
     private yerim.board.domain.soldMethod soldMethod;
+
+    public ItemSold() {
+    }
+
+    public ItemSold(User user, Item item, Long soldPrice, String whereToSold, LocalDate soldTime, yerim.board.domain.soldMethod soldMethod) {
+        this.user = user;
+        this.item = item;
+        this.soldPrice = soldPrice;
+        this.whereToSold = whereToSold;
+        this.soldTime = soldTime;
+        this.soldMethod = soldMethod;
+    }
 }
