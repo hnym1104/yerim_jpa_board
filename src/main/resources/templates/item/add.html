@@ -6,21 +6,21 @@
 </head>
 <div th:replace="fragments/menu :: menu"/>
 <body>
-<form th:object="${item}" method="post" th:action="@{/item/add}">
+<form th:object="${itemAddDto}" method="post" th:action="@{/item/add}">
     <label for="name">이름</label>
-    <input id=name th:field="*{name}" />
+    <input id=name th:field="*{name}"/>
 
     <label for="stockQuantity">수량</label>
-    <input id=stockQuantity th:field="*{stockQuantity}" />
+    <input id=stockQuantity th:field="*{quantity}"/>
 
     <label for="buyTime">구매 일시</label>
-    <input id="buyTime" th:field="*{buyTime}" />
+    <input id="buyTime" th:field="*{buyDate}"/>
 
     <label for="whereToBuy">구매처</label>
-    <input id="whereToBuy" th:field="*{whereToBuy}" />
+    <input id="whereToBuy" th:field="*{whereToBuy}"/>
 
     <label for="buyPrice">구매 가격</label>
-    <input id="buyPrice" th:field="*{buyPrice}" />
+    <input id="buyPrice" th:field="*{buyPrice}"/>
 
     <select id=category th:field="*{category}">
         <option value="">==카테고리==</option>
@@ -29,6 +29,20 @@
         <option value="shoes">신발</option>
         <option value="stock">잡화</option>
     </select>
+
+    <select id=status th:field="*{status}">
+        <option value="">==상품 상태==</option>
+        <option value="bottom">보관 판매</option>
+        <option value="top">일반 판매</option>
+        <option value="shoes">보유중</option>
+        <option value="stock">판매 완료</option>
+    </select>
+
+    <div>
+        <button type="submit" class="btn btn-primary"
+                style="background-color: #25a67b; border: none; width: 140px;">상품 등록하기
+        </button>
+    </div>
 </form>
 </body>
 </html>

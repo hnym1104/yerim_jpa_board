@@ -27,7 +27,7 @@ public class Item {
     private Long buyPrice;   // 상품 개당 가격
     private String whereToBuy;   // 구매처
 
-    private LocalDate buyTime;   // 구매 날짜
+    private LocalDate buyDate;   // 구매 날짜
     private LocalDate uploadTime;   // 상품 정보 업로드 시간
 
     @Enumerated(EnumType.STRING)
@@ -40,12 +40,12 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyTime, Status status, Category category) {
+    public Item(String name, int stockQuantity, Long buyPrice, String whereToBuy, LocalDate buyDate, Status status, Category category) {
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.buyPrice = buyPrice;
         this.whereToBuy = whereToBuy;
-        this.buyTime = buyTime;
+        this.buyDate = buyDate;
         this.status = status;
         this.category = category;
     }

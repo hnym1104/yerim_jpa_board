@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
     <style>
         .hello-field {
-            color: #000000;
+            color: #3f3f3f;
             font-size: 15px;
             font-family: "나눔스퀘어 Bold";
             font-weight: bold;
@@ -16,6 +16,16 @@
         .item {
             cursor: pointer;
         }
+
+        .type-buttons {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .add-button {
+            text-align: center;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <div th:replace="fragments/menu :: menu"/>
@@ -23,22 +33,48 @@
 <div class="hello-field">
     <p th:text="${hello}">안녕하세요</p>
 </div>
-<div class="table" style="width: 80%; margin: auto">
+<div class="add-button">
+    <button type="button" class="btn btn-primary"
+            style="background-color: #25a67b; border: none; width: 140px;"
+            th:onclick="|location.href='@{/item/add}'|">상품 등록하기</button>
+</div>
+<div class="type-buttons">
+    <button type="button" class="btn btn-primary"
+            style="background-color: #80bdff; border: none; width: 140px;"
+            th:onclick="|location.href='@{/board}'|">전체</button>
+    <button type="button" class="btn btn-primary"
+            style="background-color: #80bdff; border: none; width: 140px;"
+            th:onclick="|location.href='@{/item/types/{types}(types=|keep_selling|)}'|">보관 판매</button>
+    <button type="button" class="btn btn-primary"
+            style="background-color: #80bdff; border: none; width: 140px;"
+            th:onclick="|location.href='@{/item/types/{types}(types=|normal_selling|)}'|">일반 판매</button>
+    <button type="button" class="btn btn-primary"
+            style="background-color: #80bdff; border: none; width: 140px;"
+            th:onclick="|location.href='@{/item/types/{types}(types=|having|)}'|">보유중</button>
+    <button type="button" class="btn btn-primary"
+            style="background-color: #80bdff; border: none; width: 140px;"
+            th:onclick="|location.href='@{/item/types/{types}(types=|sold|)}'|">판매 완료</button>
+</div>
+<div th:if="${!hasItems}" style="text-align: center; font-weight: bold;">
+    <p>상품이 존재하지 않습니다.</p>
+</div>
+<div th:if="${hasItems}" class="table" style="width: 80%; margin: auto">
     <table class="table table-hover">
         <thead>
         <tr class="table table-primary">
-            <th class="table-primary">NAME</th>
-            <th class="table-primary">SELL STATUS</th>
-            <th class="table-primary">CATEGORY</th>
-            <th class="table-primary">DATE</th>
+            <th class="table-primary">상품명</th>
+            <th class="table-primary">상태</th>
+            <th class="table-primary">카테고리</th>
+            <th class="table-primary">구매 일시(등록 일시)</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table table-hover item" th:each="item : ${items}" th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|" >
+        <tr class="table table-hover item" th:each="item : ${items}"
+            th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|">
             <td th:text="${item.name}"></td>
             <td th:text="${item.status.description}">sell status</td>
             <td th:text="${item.category.name}">category</td>
-            <td th:text="${item.buyTime}">buy time</td>
+            <td th:text="${item.getBuyDate}">buy time</td>
         </tr>
         </tbody>
     </table>

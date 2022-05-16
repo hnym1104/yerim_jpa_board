@@ -53,11 +53,9 @@ public class HomeController {
         log.info("loginPW={}", loginDTO.getLoginPW());
 
         if(loginDTO.getLoginID() == "") {
-            log.info("ID NULL");
             bindingResult.addError(new FieldError("loginDTO", "loginID", loginDTO.getLoginID(), false, null, null, "아이디를 입력하세요"));
         }
         if(loginDTO.getLoginPW() == "") {
-            log.info("PW NULL");
             bindingResult.addError(new FieldError("loginDTO", "loginPW", loginDTO.getLoginPW(), false, null, null, "비밀번호를 입력하세요"));
         }
         if(!loginDTO.getLoginID().equals("") && !loginDTO.getLoginPW().equals("") && userService.findUser(loginDTO).isEmpty()) {
@@ -83,7 +81,13 @@ public class HomeController {
             model.addAttribute("hello", user.getName() + "님 안녕하세요!");
         }
         List<Item> items = itemService.getAllItem();
-        model.addAttribute("items", items);
+        if(items.isEmpty()) {
+            model.addAttribute("hasItems", false);
+        } else {
+            model.addAttribute("hasItems", true);
+            model.addAttribute("items", items);
+        }
+
         return "board";
     }
 }

@@ -9,6 +9,7 @@ import yerim.board.domain.item.*;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -56,34 +57,36 @@ public class ItemRepository {
     }
 
     public List<Item> findAllKeepSelling() {
-        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.KEEP_SELLING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.KEEP_SELLING order by i.buyDate desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllNormalSelling() {
-        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.NORMAL_SELLING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.NORMAL_SELLING order by i.buyDate desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllHaving() {
-        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.HAVING order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.HAVING order by i.buyDate desc", Item.class)
                 .getResultList();
     }
 
     public List<Item> findAllSold() {
-        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.SOLD order by i.buyTime desc", Item.class)
+        return em.createQuery("select i from Item as i where i.status = yerim.board.domain.Status.SOLD order by i.buyDate desc", Item.class)
                 .getResultList();
     }
 
-    public ItemSold findItemSoldByItemId(Long itemId) {
-        return em.createQuery("select i from ItemSold as i where i.item.id = :itemId", ItemSold.class)
+    public Optional<ItemSold> findItemSoldByItemId(Long itemId) {
+        List<ItemSold> itemSold = em.createQuery("select i from ItemSold as i where i.item.id = :itemId", ItemSold.class)
                 .setParameter("itemId", itemId)
-                .getSingleResult();
+                .getResultList();
+        return itemSold.stream().findAny();
     }
 
-    public ItemSelling findItemSellingByItemId(Long itemId) {
-        return em.createQuery("select i from ItemSelling as i where i.item.id = :itemId", ItemSelling.class)
+    public Optional<ItemSelling> findItemSellingByItemId(Long itemId) {
+        List<ItemSelling> itemSelling = em.createQuery("select i from ItemSelling as i where i.item.id = :itemId", ItemSelling.class)
                 .setParameter("itemId", itemId)
-                .getSingleResult();
+                .getResultList();
+        return itemSelling.stream().findAny();
     }
 }

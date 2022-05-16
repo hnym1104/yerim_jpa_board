@@ -5,11 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import yerim.board.DTO.ItemAddDTO;
 import yerim.board.domain.Status;
 import yerim.board.domain.item.*;
 import yerim.board.repository.ItemRepository;
 import yerim.board.service.ItemService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +22,28 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+
+    @GetMapping("types/{types}")
+    public String itemTypes(@PathVariable String types, Model model) {
+        log.info("types={}", types);
+        List<Item> items = new ArrayList<>();
+        if(types.equals("keep_selling")) {
+            items = itemRepository.findAllKeepSelling();
+        } else if(types.equals("normal_selling")) {
+            items = itemRepository.findAllNormalSelling();
+        } else if(types.equals("having")) {
+            items = itemRepository.findAllHaving();
+        } else if(types.equals("sold")) {
+            items = itemRepository.findAllSold();
+        }
+        if(items.isEmpty()) {   // list empty
+            model.addAttribute("hasItems", false);
+        } else {
+            model.addAttribute("hasItems", true);
+            model.addAttribute("items", items);
+        }
+        return "/board";
+    }
 
     @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
@@ -37,13 +61,14 @@ public class ItemController {
 
     @GetMapping("/add")
     public String add(Model model) {
-        model.addAttribute("item", new Item());
+        model.addAttribute("itemAddDto", new ItemAddDTO());
         return "item/add";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Item item) {
-        return "redirect:board";
+    public String add(@ModelAttribute ItemAddDTO itemAddDTO) {
+        System.out.println("itemAddDTO = " + itemAddDTO.toString());
+        return "redirect:/board";
     }
 
 
