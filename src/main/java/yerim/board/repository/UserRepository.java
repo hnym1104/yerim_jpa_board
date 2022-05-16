@@ -8,6 +8,7 @@ import yerim.board.domain.User;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,7 +20,6 @@ public class UserRepository {
     @Transactional
     public void save(User user) {
         em.persist(user);
-        log.info("userId={}", user.getId());
     }
 
     public User findOne(Long userId) {
@@ -31,10 +31,11 @@ public class UserRepository {
                 .getResultList();
     }
 
-    public User findOneById(String loginID, String loginPW) {   // ID, PW 동일한 회원 검색
-        return em.createQuery("select u from User as u where u.loginID = :loginID and u.loginPW = :loginPW", User.class)
+    public Optional<User> findOneByIdPw(String loginID, String loginPW) {   // ID, PW 동일한 회원 검색
+        List<User> resultList = em.createQuery("select u from User as u where u.loginID = :loginID and u.loginPW = :loginPW", User.class)
                 .setParameter("loginID", loginID)
                 .setParameter("loginPW", loginPW)
-                .getSingleResult();
+                .getResultList();
+        return resultList.stream().findAny();
     }
 }

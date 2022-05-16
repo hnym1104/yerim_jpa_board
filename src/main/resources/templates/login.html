@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,75 +12,91 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/login_theme/css/bootstrap.min.css">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="/login_theme/css/style.css">
 
     <title>Login</title>
-  </head>
-  <body>
-  <div class="content">
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: "나눔스퀘어 Bold";
+        }
+    </style>
+</head>
+<body>
+<div class="content">
     <div class="container">
-      <div class="row justify-content-center">
-        <!-- <div class="col-md-6 order-md-2">
-          <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
-        </div> -->
-        <div class="col-md-6 contents">
-          <div class="row justify-content-center">
-            <div class="col-md-12">
-              <div class="form-block">
-                  <div class="mb-4">
-                  <h3>Sign In to <strong>Board</strong></h3>
-                  <p class="mb-4">Welcome to Yerim Board!</p>
+        <div class="row justify-content-center">
+            <!-- <div class="col-md-6 order-md-2">
+              <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
+            </div> -->
+            <div class="col-md-6 contents">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="form-block">
+                            <div class="mb-4">
+                                <h3>Sign In to <strong>Board</strong></h3>
+                                <p class="mb-4">Welcome to Yerim Board!</p>
+                            </div>
+
+                            <form th:object="${loginDTO}" th:action="@{/login}" method="post">
+                                <div th:if="${#fields.hasGlobalErrors()}">
+                                    <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+                                        글로벌 오류 메시지</p>
+                                </div>
+                                <div class="form-group first">
+                                    <label for="loginID">ID</label>
+                                    <input type="text" class="form-control" id="loginID" th:field="*{loginID}">
+                                    <div class="field-error" th:errors="*{loginID}">아이디 입력 오류</div>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="loginPW">Password</label>
+                                    <input type="password" class="form-control" id="loginPW" th:field="*{loginPW}">
+                                    <div class="field-error" th:errors="*{loginPW}">비밀번호 입력 오류</div>
+                                </div>
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0"><span
+                                            class="caption">Remember me</span>
+                                        <input type="checkbox" checked="checked"/>
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                                </div>
+
+                                <input type="submit" value="Log In"
+                                       class="btn btn-pill text-white btn-block btn-primary">
+                                <input type="button" value="Join" class="btn btn-pill text-white btn-block btn-primary"
+                                       onClick="location.href='/join'">
+
+                                <span class="d-block text-center my-4 text-muted"> or sign in with</span>
+
+                                <div class="social-login text-center">
+                                    <a href="#" class="facebook">
+                                        <span class="icon-facebook mr-3"></span>
+                                    </a>
+                                    <a href="#" class="twitter">
+                                        <span class="icon-twitter mr-3"></span>
+                                    </a>
+                                    <a href="#" class="google">
+                                        <span class="icon-google mr-3"></span>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <form  th:action="@{/login}" method="post">
-                  <div class="form-group first">
-                    <label for="loginID">ID</label>
-                    <input type="text" class="form-control" id="loginID" name="loginID">
-
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="loginPW">Password</label>
-                    <input type="password" class="form-control" id="loginPW" name="loginPW">
-                    
-                  </div>
-                  
-                  <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                      <input type="checkbox" checked="checked"/>
-                      <div class="control__indicator"></div>
-                    </label>
-                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
-                  </div>
-
-                  <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
-                  <input type="button" value="Join" class="btn btn-pill text-white btn-block btn-primary"
-                         onClick="location.href='/join'">
-
-                  <span class="d-block text-center my-4 text-muted"> or sign in with</span>
-                  
-                  <div class="social-login text-center">
-                    <a href="#" class="facebook">
-                      <span class="icon-facebook mr-3"></span> 
-                    </a>
-                    <a href="#" class="twitter">
-                      <span class="icon-twitter mr-3"></span> 
-                    </a>
-                    <a href="#" class="google">
-                      <span class="icon-google mr-3"></span> 
-                    </a>
-                  </div>
-                </form>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-    <script src="/login_theme/js/jquery-3.3.1.min.js"></script>
-    <script src="/login_theme/js/popper.min.js"></script>
-    <script src="/login_theme/js/bootstrap.min.js"></script>
-    <script src="/login_theme/js/main.js"></script>
-  </body>
+</div>
+<script src="/login_theme/js/jquery-3.3.1.min.js"></script>
+<script src="/login_theme/js/popper.min.js"></script>
+<script src="/login_theme/js/bootstrap.min.js"></script>
+<script src="/login_theme/js/main.js"></script>
+</body>
 </html>

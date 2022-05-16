@@ -4,29 +4,44 @@
     <title>Item List</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <style>
+        .hello-field {
+            color: #000000;
+            font-size: 15px;
+            font-family: "나눔스퀘어 Bold";
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .item {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <div th:replace="fragments/menu :: menu"/>
 <body>
-    <div class="table" style="width: 80%; margin: auto">
-        <table class="table table-hover">
-            <thead>
-            <tr class="table table-primary">
-                <th class="table-primary">NAME</th>
-                <th class="table-primary">SELL STATUS</th>
-                <th class="table-primary">CATEGORY</th>
-                <th class="table-primary">DATE</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="table table-hover" th:each="item : ${items}">
-                <td th:text="${item.name}"
-                    th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|"></td>
-                <td th:text="${item.status.description}">sell status</td>
-                <td th:text="${item.category.name}">category</td>
-                <td th:text="${item.buyTime}">buy time</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="hello-field">
+    <p th:text="${hello}">안녕하세요</p>
+</div>
+<div class="table" style="width: 80%; margin: auto">
+    <table class="table table-hover">
+        <thead>
+        <tr class="table table-primary">
+            <th class="table-primary">NAME</th>
+            <th class="table-primary">SELL STATUS</th>
+            <th class="table-primary">CATEGORY</th>
+            <th class="table-primary">DATE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table table-hover item" th:each="item : ${items}" th:onclick="|location.href='@{/item/{pv1}(pv1=${item.id})}'|" >
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.status.description}">sell status</td>
+            <td th:text="${item.category.name}">category</td>
+            <td th:text="${item.buyTime}">buy time</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
