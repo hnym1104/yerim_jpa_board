@@ -7,12 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import yerim.board.domain.User;
 import yerim.board.repository.UserRepository;
+import yerim.board.service.UserService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
 
     private final UserRepository userRepository;

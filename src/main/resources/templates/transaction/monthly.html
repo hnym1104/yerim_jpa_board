@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Monthly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <style>
+        .hello-field {
+            color: #3f3f3f;
+            font-size: 15px;
+            font-family: "나눔스퀘어 Bold";
+            font-weight: bold;
+            text-align: center;
+        }
+        .add-button {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .month-info-field {
+            color: #3f3f3f;
+            font-size: 18px;
+            font-family: "나눔스퀘어 Bold";
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<div th:replace="fragments/menu :: menu"/>
+<body>
+<div class="hello-field">
+    <p th:text="|${user.name}님 안녕하세요!|">안녕하세요</p>
+</div>
+<div class="add-button">
+    <button type="button" class="btn btn-primary"
+            style="background-color: #25a67b; border: none; width: 160px;"
+            th:onclick="|location.href='@{/item/add}'|">새상품 등록하기</button>
+</div>
+<div class="month-info-field">
+    <p th:text="|${month}월 거래량 및 수익 현황|">이번달 거래량 및 수익 현황</p>
+</div>
+<div>
+    <table class="table table-bordered" style="width: 80%; margin: auto;">
+        <thead>
+            <tr>
+                <th>거래량</th>
+                <th>총 구매 금액</th>
+                <th>총 판매 금액</th>
+                <th>부가비용(택배비 등)</th>
+                <th>총 수익</th>
+                <th>거래량별 평균 수익</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>거래량</td>
+                <td>총 구매 금액</td>
+                <td>총 판매 금액</td>
+                <td>부가비용(택배비 등)</td>
+                <td>총 수익</td>
+                <td>거래량별 평균 수익</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

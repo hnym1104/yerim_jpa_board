@@ -1,7 +1,6 @@
 package yerim.board.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import yerim.board.DTO.LoginDTO;
 import yerim.board.domain.User;
@@ -15,7 +14,9 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Optional<User> findUser(LoginDTO loginDTO) {
-        return userRepository.findOneByIdPw(loginDTO.getLoginID(), loginDTO.getLoginPW());
+    public User login(LoginDTO loginDTO) {
+        return userRepository.findOneById(loginDTO.getLoginID())
+                .filter(m -> m.getLoginPW().equals(loginDTO.getLoginPW()))
+                .orElse(null);
     }
 }

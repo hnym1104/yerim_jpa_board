@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import yerim.board.DTO.ItemAddDTO;
 import yerim.board.domain.Status;
+import yerim.board.domain.User;
 import yerim.board.domain.item.*;
 import yerim.board.repository.ItemRepository;
 import yerim.board.service.ItemService;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,25 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+
+    @GetMapping("/list")
+    public String getItemList(Model model, HttpSession httpSession) {
+        User user = (User)httpSession.getAttribute("user");
+        if(user == null) {
+            model.addAttribute("hello", "회원님 안녕하세요!");
+        } else {
+            model.addAttribute("hello", user.getName() + "님 안녕하세요!");
+        }
+        List<Item> items = itemService.getAllItem();
+        if(items.isEmpty()) {
+            model.addAttribute("hasItems", false);
+        } else {
+            model.addAttribute("hasItems", true);
+            model.addAttribute("items", items);
+        }
+
+        return "item/list";
+    }
 
     @GetMapping("types/{types}")
     public String itemTypes(@PathVariable String types, Model model) {

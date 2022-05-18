@@ -1,10 +1,10 @@
 package yerim.board.DTO;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class ItemAddDTO {
 
     private String name;

@@ -21,7 +21,7 @@ public class InitMethod {
 
     @PostConstruct
     public void categoryInit() {   // 필요 data 우선 저장
-        User user = new User("admin", "admin", "sudoUser", "user@naver.com");
+        User user = new User("admin", "admin!", "sudoUser", "user@naver.com");
         userRepository.save(user);
         User findUser = userRepository.findOne(user.getId());
 
@@ -34,10 +34,10 @@ public class InitMethod {
         categoryRepository.save(shoesCategory);
         categoryRepository.save(stockCategory);
 
-        /*Bottom bottom1 = new Bottom("bottom1", 1, 20000L, "KREAM", LocalDate.of(2021, 5, 2)
+        Bottom bottom1 = new Bottom("bottom1", 1, 20000L, "KREAM", LocalDate.of(2021, 5, 2)
                 , Status.KEEP_SELLING, bottomCategory, "M");
         Top top1 = new Top("top1", 1, 40000L, "KREAM", LocalDate.of(2021, 5, 4)
-                , Status.KEEP_SELLING, topCategory, "L");*/
+                , Status.KEEP_SELLING, topCategory, "L");
 
         Shoes shoes1 = new Shoes("shoes1", 1, 100000L, "KREAM", LocalDate.of(2021, 7, 2)
                 , Status.NORMAL_SELLING, shoesCategory, "260");
@@ -53,21 +53,21 @@ public class InitMethod {
                 , Status.SOLD, shoesCategory, "250");
         Stock stock2 = new Stock("stock2", 4, 5000L, "COUPANG", LocalDate.of(2021, 6, 5)
                 , Status.SOLD, stockCategory, StockKind.STICKER);
-        //itemRepository.save(bottom1);
+        itemRepository.save(bottom1);
         itemRepository.save(bottom2);
-        //itemRepository.save(top1);
+        itemRepository.save(top1);
         itemRepository.save(top2);
         itemRepository.save(shoes1);
         itemRepository.save(shoes2);
         itemRepository.save(stock1);
         itemRepository.save(stock2);
 
-        //ItemSelling itemSelling_bottom1 = new ItemSelling(findUser, bottom1, 30000L, "KREAM", Status.KEEP_SELLING);
-        //ItemSelling itemSelling_top1 = new ItemSelling(findUser, top1, 50000L, "KREAM", Status.KEEP_SELLING);
+        ItemSelling itemSelling_bottom1 = new ItemSelling(findUser, bottom1, 30000L, "KREAM", Status.KEEP_SELLING);
+        ItemSelling itemSelling_top1 = new ItemSelling(findUser, top1, 50000L, "KREAM", Status.KEEP_SELLING);
         ItemSelling itemSelling_shoes1 = new ItemSelling(findUser, shoes1, 100000L, "KREAM", Status.NORMAL_SELLING);
         ItemSelling itemSelling_stock1 = new ItemSelling(findUser, stock1, 100000L, "COUPANG", Status.NORMAL_SELLING);
-        //itemRepository.saveSellingItem(itemSelling_bottom1);
-        //itemRepository.saveSellingItem(itemSelling_top1);
+        itemRepository.saveSellingItem(itemSelling_bottom1);
+        itemRepository.saveSellingItem(itemSelling_top1);
         itemRepository.saveSellingItem(itemSelling_shoes1);
         itemRepository.saveSellingItem(itemSelling_stock1);
 

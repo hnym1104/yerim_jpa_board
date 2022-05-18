@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import yerim.board.domain.User;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -31,11 +32,14 @@ public class UserRepository {
                 .getResultList();
     }
 
-    public Optional<User> findOneByIdPw(String loginID, String loginPW) {   // ID, PW 동일한 회원 검색
-        List<User> resultList = em.createQuery("select u from User as u where u.loginID = :loginID and u.loginPW = :loginPW", User.class)
-                .setParameter("loginID", loginID)
-                .setParameter("loginPW", loginPW)
-                .getResultList();
-        return resultList.stream().findAny();
+    public Optional<User> findOneById(String loginID) {
+        return findAll().stream()
+                .filter(m -> m.getLoginID().equals(loginID))
+                .findFirst();
+    }
+
+    @Transactional   // 해당 어노테이션 없으면 영속성 컨텍스트에만 반영되고 DB랑 동기화 X
+    public void update(User user) {
+        user.setName("NEWNEW User");
     }
 }
