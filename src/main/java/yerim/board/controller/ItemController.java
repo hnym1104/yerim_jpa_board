@@ -88,7 +88,7 @@ public class ItemController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute ItemAddDTO itemAddDTO) {
-        System.out.println("itemAddDTO = " + itemAddDTO.toString());
+        log.info("itemAddDTO={}", itemAddDTO.toString());
         return "redirect:/board";
     }
 

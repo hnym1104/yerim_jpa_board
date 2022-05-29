@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Monthly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <style>
+        .month-info-field {
+            color: #3f3f3f;
+            font-size: 18px;
+            font-family: "나눔스퀘어 Bold";
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .each-month-table {
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<div th:replace="fragments/menu :: menu"/>
+<body>
+<div class="month-info-field">
+    <p th:text="|전채 거래량 및 수익 현황|">이번달 거래량 및 수익 현황</p>
+</div>
+<div th:each="ta : ${TAList}" class="each-month-table">
+    <div class="month-info-field">
+        <p th:text="|${ta.getDate().getYear()}년 ${ta.getDate().getMonthValue()}월|">이번달 거래량 및 수익 현황</p>
+    </div>
+    <table class="table table-bordered" style="width: 80%; margin: auto; text-align: center;">
+        <thead>
+        <tr>
+            <th>거래량</th>
+            <th>총 구매 금액</th>
+            <th>총 판매 금액</th>
+            <th>부가비용(택배비 등)</th>
+            <th>총 수익</th>
+            <th>거래량별 평균 수익</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${ta.tradingVolume}">월 거래량</td>
+            <td th:text="${ta.totalBuyPrice}">월 총 구매 금액</td>
+            <td th:text="${ta.totalSellPrice}">월 총 판매 금액</td>
+            <td th:text="${ta.extra}">부가비용(택배비 등)</td>
+            <td th:text="${ta.totalBene}">월 총 수익</td>
+            <td th:text="${ta.aveBene}">월 거래량별 평균 수익</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

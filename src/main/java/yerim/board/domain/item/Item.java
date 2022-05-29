@@ -50,8 +50,7 @@ public class Item {
         this.category = category;
     }
 
-    /*public Long totalPrice() {
+    public Long getTotalPrice() {
         return stockQuantity * buyPrice;   // 총 구매 가격
-    }*/
-
+    }
 }

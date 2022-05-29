@@ -18,7 +18,6 @@ public class CategoryRepository {
     @Transactional
     public void save(Category category) {
         em.persist(category);
-        log.info("categoryName={}", category.getName());
     }
 
     public Category findByName(String name) {

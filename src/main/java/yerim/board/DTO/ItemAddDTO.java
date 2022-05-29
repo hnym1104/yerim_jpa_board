@@ -1,18 +1,31 @@
 package yerim.board.DTO;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class ItemAddDTO {
 
+    @NotBlank
     private String name;
+
+    @NotBlank
     private int quantity;
+
+    @NotBlank
     private String buyDate;
+
+    @NotBlank
     private String whereToBuy;
+
+    @NotBlank
     private Long buyPrice;
+
+    @NotBlank
     private String category;
+
+    @NotBlank
     private String status;
 
     @Override

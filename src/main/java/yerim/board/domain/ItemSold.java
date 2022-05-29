@@ -25,8 +25,10 @@ public class ItemSold {   // 판매 완료된 ITEM
     private Item item;
 
     private Long soldPrice;   // 판매가
+    private int soldQuantity;   // 판매 수
     private String whereToSold;   // 판매처
     private LocalDate soldTime;   // 판매일시
+    private long extra;   // 부가 비용
 
     @Enumerated(EnumType.STRING)
     private yerim.board.domain.soldMethod soldMethod;
@@ -34,12 +36,18 @@ public class ItemSold {   // 판매 완료된 ITEM
     public ItemSold() {
     }
 
-    public ItemSold(User user, Item item, Long soldPrice, String whereToSold, LocalDate soldTime, yerim.board.domain.soldMethod soldMethod) {
+    public ItemSold(User user, Item item, Long soldPrice, int soldQuantity, String whereToSold, LocalDate soldTime, long extra, yerim.board.domain.soldMethod soldMethod) {
         this.user = user;
         this.item = item;
         this.soldPrice = soldPrice;
+        this.soldQuantity = soldQuantity;
         this.whereToSold = whereToSold;
         this.soldTime = soldTime;
+        this.extra = extra;
         this.soldMethod = soldMethod;
+    }
+
+    public long getTotalSoldPrice() {
+        return soldQuantity * soldPrice;
     }
 }

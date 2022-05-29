@@ -71,8 +71,8 @@ public class InitMethod {
         itemRepository.saveSellingItem(itemSelling_shoes1);
         itemRepository.saveSellingItem(itemSelling_stock1);
 
-        ItemSold itemSold_shoes2 = new ItemSold(findUser, shoes2, 200000L, "중고나라", LocalDate.of(2021, 7, 4), soldMethod.KEEP_SOLD);
-        ItemSold itemSold_stock2 = new ItemSold(findUser, stock2, 200000L, "당근마켓", LocalDate.of(2021, 7, 1), soldMethod.NORMAL_SOLD);
+        ItemSold itemSold_shoes2 = new ItemSold(findUser, shoes2, 200000L, 1, "중고나라", LocalDate.of(2022, 5, 4), 1000L, soldMethod.KEEP_SOLD);
+        ItemSold itemSold_stock2 = new ItemSold(findUser, stock2, 200000L, 1, "당근마켓", LocalDate.of(2022, 5, 1), 1000L, soldMethod.NORMAL_SOLD);
         itemRepository.saveSoldItem(itemSold_shoes2);
         itemRepository.saveSoldItem(itemSold_stock2);
     }

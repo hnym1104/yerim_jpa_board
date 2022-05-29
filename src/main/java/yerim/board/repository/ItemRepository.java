@@ -8,6 +8,7 @@ import yerim.board.domain.item.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,4 +90,24 @@ public class ItemRepository {
                 .getResultList();
         return itemSelling.stream().findAny();
     }
+
+    public List<Item> getThisMonthBuy(LocalDate firstDay, LocalDate lastDay) {
+        return em.createQuery("select i from Item as i where i.buyDate between :firstDay and :lastDay", Item.class)
+                .setParameter("firstDay", firstDay)
+                .setParameter("lastDay", lastDay)
+                .getResultList();
+    }
+
+    public List<ItemSold> getThisMonthSell(LocalDate firstDay, LocalDate lastDay) {
+        return em.createQuery("select s from ItemSold  as s where s.soldTime between :firstDay and :lastDay", ItemSold.class)
+                .setParameter("firstDay", firstDay)
+                .setParameter("lastDay", lastDay)
+                .getResultList();
+    }
+
+    public LocalDate getOldestDate() {   // 가장 옛날에 산 것이 가장 옛날 활동
+        return em.createQuery("select min(i.buyDate) from Item as i ", LocalDate.class)
+                .getSingleResult();
+    }
+
 }
